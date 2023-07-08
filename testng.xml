@@ -7,7 +7,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
     <suite name="TestSuite">
     <test name="PRJ_Test">
         <classes>
-            <class name="org.wave.prj_webpage.test.LoginSystem"/>      
+            <class name="org.wave.prj_webpage.test.LoginSystem"/>
+            <class name="org.wave.prj_webpage.test.SearchSystem"/>           
         </classes>
     </test>
 </suite>
