@@ -38,6 +38,7 @@ public class CreateSystem {
     }
 
     @DataProvider(name = "createData")
+    //data provider = với cái serialized testing của JUnit nhưng này thì đc phân biệt bới Name
     public static Object[] createData() {
 
         return new Object[][]{
@@ -52,8 +53,16 @@ public class CreateSystem {
             {"", "", "", ""},};
     }
 
+    //tên groups giống như param id vậy, hàm include với exclude ghi trong file xml sẽ quyết định hàm có id nhất định chạy
     @Test(dataProvider = "createData", priority = 1, groups = "function")
+    //hàm test của testng nó cho mình configurate thêm nhiều tính năng
+    //còn JUnit thì cần các tag khác
+    //dataProvider đây để lấy data theo kiểu DDT
+    //priority là điều chỉnh thứ tự test nếu ko để thì java sẽ chạy theo bảng chữ cái
+    //đây vd ko để priority thì hàm testError chạy trc hàm testSearch (test 2 chạy trc test 1)
+    //có priority thì nó chạy theo thứ tự nhưng priority này chỉ dùng trong cùng 1 test file thôi
     public void testSearch(String userID, String name, String password, String confirm) throws InterruptedException {
+        System.out.println("Test 1");
         myBrowser.get("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html");
         myBrowser.manage().window().maximize();
         WebElement btnCreate = myBrowser.findElement(By.xpath("(//a[normalize-space()='Create Page'])[1]"));
@@ -93,8 +102,9 @@ public class CreateSystem {
     }
 
     //@Ignore
-    @Test(dataProvider = "errorData", priority = 2, groups = "error")
-    public void testError(String userID, String name, String password, String confirm) throws InterruptedException {        
+    @Test(dataProvider = "errorData",priority = 2, groups = "error")
+    public void testError(String userID, String name, String password, String confirm) throws InterruptedException { 
+        System.out.println("Test 2");
         WebElement txtUserID = myBrowser.findElement(By.xpath("(//input[@name='userID'])[1]"));
         txtUserID.sendKeys(userID);
         WebElement txtName = myBrowser.findElement(By.xpath("(//input[@name='fullName'])[1]"));

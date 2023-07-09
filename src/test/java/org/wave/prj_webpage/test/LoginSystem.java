@@ -44,10 +44,11 @@ public class LoginSystem {
 
         return new Object[][]{
             {"test", "2", "Invalid userID or password"},
-            {"Hoadnt", "1", "Hoa Doan"},
+            {"Hoadnt", "1", "Hoa Doann"},
             {"admin", "1", "Toi la admin"},};
     }
 
+    
     @Test(dataProvider = "loginData", priority = 1)
     public void testLogin(String userID, String password, String expected) throws InterruptedException {
         myBrowser.get("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html");
