@@ -5,12 +5,16 @@
 package org.wave.prj_webpage.test;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
@@ -19,12 +23,22 @@ import org.testng.annotations.Test;
  */
 public class SearchSystem {
     
-    private static ChromeDriver myBrowser;   
+    private static WebDriver myBrowser;   
+    
     
     @BeforeClass
-    public static void setUpClass() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        myBrowser = new ChromeDriver();
+    @Parameters("browser")
+    public static void setUpClass(@Optional("chrome")String browser) throws Exception {
+        switch(browser){
+            case "chrome":
+                System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+                myBrowser = new ChromeDriver();
+                break;
+            case "edge":
+                System.setProperty("webdriver.edge.driver", "msedgedriver.exe");
+                myBrowser = new EdgeDriver();
+        }
+        
     }
 
     @AfterClass
@@ -43,8 +57,10 @@ public class SearchSystem {
         };
     }
      
-    @Test(dataProvider="updateData",priority = 2)
-    public void testSearch(String userName, String role) throws InterruptedException{
+    @Parameters("url")
+    @Test(priority = 1, groups = "function")
+    public void testSearch(@Optional("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html")String url) throws InterruptedException{
+        System.out.println("Test 1");
         myBrowser.get("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html");
         myBrowser.manage().window().maximize();
         WebElement txtUserID = myBrowser.findElement(By.xpath("(//input[@type='text'])[1]"));
@@ -57,6 +73,12 @@ public class SearchSystem {
         WebElement btnSearch = myBrowser.findElement(By.xpath("(//input[@value='Search'])[1]"));
         btnSearch.click();
         Thread.sleep(1000);       
+        System.out.println(myBrowser.findElement(By.xpath("(//table)[1]")).isDisplayed());
+    }
+    
+    @Test(dataProvider="updateData", priority = 2, groups = {"function","edit"})
+    public void testEdit(String userName, String role) throws InterruptedException{
+        System.out.println("Test 2");
         WebElement txtUserName = myBrowser.findElement(By.xpath("(//td)[24]")).findElement(By.name("fullName"));        
         txtUserName.clear();
         txtUserName.sendKeys(userName);    
@@ -75,6 +97,10 @@ public class SearchSystem {
         WebElement txtTestRole = myBrowser.findElement(By.xpath("(//td)[4]")).findElement(By.name("roleID"));
         assertEquals(txtTestName.getAttribute("value"), userName);
         assertEquals(txtTestRole.getAttribute("value"), role);
+        Thread.sleep(1000);
+        WebElement txtSearch1 = myBrowser.findElement(By.cssSelector("form[method='post'] input[name='search']"));
+        txtSearch1.clear();       
+        WebElement btnSearch2 = myBrowser.findElement(By.cssSelector("input[value='Search']"));
+        btnSearch2.click();
     }
-    
 }

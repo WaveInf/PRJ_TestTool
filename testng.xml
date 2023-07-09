@@ -5,9 +5,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
 -->
 
     <suite name="TestSuite">
+<!--    <parameter name = "browser" value = "chrome"/>-->
+<!--    <parameter name = "browser" value = "edge"/>-->
+<!--    <parameter name = "url" value = "http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html"/>-->
     <test name="PRJ_Test">
-        <classes>
-            <class name="org.wave.prj_webpage.test.LoginSystem"/>      
-        </classes>
+        <groups>
+            <run>
+<!--                <include name = "function"/>-->
+                <exclude name = "edit"/>
+            </run>
+        </groups>
+        <classes>           
+            <class name="org.wave.prj_webpage.test.LoginSystem"/> 
+            <class name="org.wave.prj_webpage.test.SearchSystem">
+<!--                <methods>
+                    <include name = "testSearch"/>
+                </methods>-->
+            </class>   
+            <class name="org.wave.prj_webpage.test.CreateSystem"/>      
+        </classes>       
     </test>
 </suite>
