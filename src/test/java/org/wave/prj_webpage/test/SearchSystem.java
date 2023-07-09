@@ -64,7 +64,7 @@ public class SearchSystem {
     @Parameters("url")
     @Test(priority = 1, groups = "function")
     public void testSearch(@Optional("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html")String url) throws InterruptedException{
-        System.out.println("Test 1");
+//        System.out.println("Test 1");
         myBrowser.get(url);
         myBrowser.manage().window().maximize();
         
@@ -85,15 +85,16 @@ public class SearchSystem {
         WebElement btnSearch = myBrowser.findElement(By.xpath("(//input[@value='Search'])[1]"));
         btnSearch.click();
         Thread.sleep(1000);       
+        assertTrue(myBrowser.findElement(By.xpath("(//table)[1]")).isDisplayed());
         System.out.println(myBrowser.findElement(By.xpath("(//table)[1]")).isDisplayed());
     }
     
     @Test(dataProvider="updateData", priority = 2, groups = {"function","edit"})
     public void testEdit(String userName, String role) throws InterruptedException{
-        System.out.println("Test 2");
+//        System.out.println("Test 2");
         WebElement txtUserName = myBrowser.findElement(By.xpath("(//td)[24]")).findElement(By.name("fullName"));        
         txtUserName.clear();
-    txtUserName.sendKeys(userName);  
+        txtUserName.sendKeys(userName);  
         
         // CLear role box and input new role
         WebElement txtRole = myBrowser.findElement(By.xpath("(//td)[25]")).findElement(By.name("roleID"));

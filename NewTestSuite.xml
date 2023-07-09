@@ -18,5 +18,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
             </class>
         </classes>
     </test>
+    <test>
+        <classes>
+            <class>
+                
+            </class>
+        </classes>
+    </test>
 </suite>
 
