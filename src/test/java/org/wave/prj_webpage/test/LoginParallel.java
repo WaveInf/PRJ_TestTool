@@ -42,9 +42,7 @@ public class LoginParallel {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         myBrowser = new ChromeDriver();
         myBrowser.get("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html");
-        Thread.sleep(1000);
         myBrowser.findElement(By.xpath("(//input[@type='text'])[1]")).sendKeys(userID);
-        Thread.sleep(1000);
         myBrowser.findElement(By.xpath("(//input[@name='password'])[1]")).sendKeys(password);
         WebElement btnLogin = myBrowser.findElement(By.xpath("(//input[@name='action'])[1]"));
         btnLogin.click();
@@ -58,9 +56,7 @@ public class LoginParallel {
         System.setProperty("webdriver.edge.driver", "msedgedriver.exe");
         myEdge = new EdgeDriver();
         myEdge.get("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html");
-        Thread.sleep(1000);
         myEdge.findElement(By.xpath("(//input[@type='text'])[1]")).sendKeys(userID);
-        Thread.sleep(1000);
         myEdge.findElement(By.xpath("(//input[@name='password'])[1]")).sendKeys(password);
         WebElement btnLogin = myEdge.findElement(By.xpath("(//input[@name='action'])[1]"));
         btnLogin.click();
@@ -68,4 +64,5 @@ public class LoginParallel {
         assertNotEquals(myEdge.getTitle(), "Login Page");
         myEdge.quit();
     }
+    
 }

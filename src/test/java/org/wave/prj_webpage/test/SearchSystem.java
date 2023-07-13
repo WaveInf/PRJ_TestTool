@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/EmptyTestNGTest.java to edit this template
  */
 package org.wave.prj_webpage.test;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,7 +61,7 @@ public class SearchSystem {
     }
      
     @Parameters("url")
-    @Test(priority = 1, groups = "function")
+    @Test(priority = 1, groups = {"function","search"})
     public void testSearch(@Optional("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html")String url) throws InterruptedException{
 //        System.out.println("Test 1");
         myBrowser.get(url);

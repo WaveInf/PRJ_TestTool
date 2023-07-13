@@ -7,6 +7,7 @@ package org.wave.prj_webpage.test;
 import org.testng.annotations.DataProvider;
 
 public class LoginDetails {
+    //Take data from another class
     @DataProvider
     public static Object[] loginData() {
 
@@ -14,6 +15,15 @@ public class LoginDetails {
             {"test", "2", "Invalid userID or password"},
             {"Hoadnt", "1", "Hoa Doan"},
             {"admin", "1", "Toi la admin"},
+        };
+    }
+    
+    @DataProvider
+    public static Object[] loginData2() {
+
+        return new Object[][]{
+            {"test", "1", ""},
+            
         };
     }
 }

@@ -33,6 +33,7 @@ public class LoginSystem {
         myBrowser = new ChromeDriver();
     }
 
+   
     @AfterClass
     public static void tearDownClass() throws Exception {
         Thread.sleep(3000); //1000 là 1s
@@ -49,8 +50,8 @@ public class LoginSystem {
         };
     }
     
-    @Test(dataProvider = "loginData", priority = 1)
-//    @Test(dataProvider = "loginData",dataProviderClass = LoginDetails.class, priority = 1)
+    @Test(dataProvider = "loginData")
+//    @Test(dataProvider = "loginData",dataProviderClass = LoginDetails.class)
     public void testLogin(String userID, String password, String expected) throws InterruptedException {
         myBrowser.get("http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html");
         myBrowser.manage().window().maximize();
@@ -67,8 +68,6 @@ public class LoginSystem {
         } catch (Exception e) {
             WebElement txtUserName = myBrowser.findElement(By.cssSelector("body h1"));
             assertEquals(expected + " Information", txtUserName.getText());
-            WebElement btnLogout = myBrowser.findElement(By.xpath("(//a[normalize-space()='Log out'])[1]"));
-            btnLogout.click();
         }
     }
     

@@ -3,56 +3,76 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
 -->
-    <!--để tui chỉ cách tạo cái này là cái test Suite-->
+
     <suite name="TestSuite">
+        
         <!--cái này sẽ truyền 1 param tên browser có value là chrome còn ở dưới là param của edge
         còn nếu mà ko có thông số thì nó sẽ ko truyền nhưng vd cái thông số đó mình cần thì sao?
         chẳng lẽ nó đưa null        -->
+        
     <parameter name = "browser" value = "chrome"/>
 <!--    <parameter name = "browser" value = "edge"/>-->
     <parameter name = "url" value = "http://localhost:8080/PE_PRJ301_T4S4_JSTL/login.html"/>
-    <test name="PRJ_Test" enabled = "false">
-        <!--cái param group này tui nói sau
-        param group dùng để define các test case để chạy nó giống như
+    
+    <listeners>
+        <listener class-name="org.wave.prj_webpage.test.TestIListener"/> 
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>              
+    </listeners>
+    
+    <test name="PRJ_Test" enabled = "true"> <!--parallel = "classes">-->
+    
+        <!--param group dùng để define các test case để chạy nó giống như
         phiên bản rộng hơn của methods là thay vì chỉ define trong 1 file
-        nó áp dụng cho mọi file trong package-->
+        nó áp dụng cho mọi file trong suite-->
+        
         <groups>
             <run>
                 <!--hàm include thì chỉ các hàm có name là function như dưới đây mới chạy 
                 do hàm edit có cả 2 name là function và edit nên nó mới hiện 2 group
                 Nhưng hàm mà ko có groups name thì hàm include sẽ loại bỏ-->
-<!--                <include name = "function"/>-->
+                
+<!--                <include name = "search"/>-->
                 
                 <!--còn hàm exclude là mọi hàm ngoại trừ hàm có name là edit chạy 
                 giờ vd cho exclude hàm error đi
                 Mọi hàm đều chạy ngoại trừ error-->
-<!--                <exclude name = "error"/>-->
+                
+                <exclude name = "edit"/>
             </run>
         </groups>
         <classes>           
             <class name="org.wave.prj_webpage.test.LoginSystem"/> 
-            <class name="org.wave.prj_webpage.test.SearchSystem" >
+            <class name="org.wave.prj_webpage.test.SearchSystem">
+                
 <!--                param methods này dùng để chọn các hàm trong 1 test file để chạy
                  trong SearchSystem có 2 function nếu ko có hàm methods với include nó sẽ chạy cả 2
                 nhưng đây nó sẽ chỉ thực hiện testSearch và ko chạy testEdit-->
-                <methods>
+                
+<!--                <methods>
                     <include name = "testSearch"/>
-                </methods>
+                </methods>-->
             </class>   
                
         </classes>       
 
     </test>
-    <test name = "ExtraTest" enabled = "false">
+    <test name = "ExtraTest" enabled = "true">
         <classes>
             <class name="org.wave.prj_webpage.test.CreateSystem"/>   
         </classes>
     </test>
     
     <!--parallel methods là chạy song song các function trong test cùng 1 lúc -->
-    <test thread-count="2" name = "Parallel" enabled = "true" parallel = "methods">
+    <test thread-count="1000" name = "Parallel" enabled = "true" parallel = "methods">
         <classes>
             <class name="org.wave.prj_webpage.test.LoginParallel"/>   
         </classes>
     </test>
+    
+    <test name = "demoGuru" enabled = "false">
+        <classes>
+            <class name = "org.wave.prj_webpage.test.SkipExTest"/>
+        </classes>
+    </test>
 </suite>
+
